@@ -3,8 +3,9 @@
 - Rapport du projet (6 pages)
 - Support de Présentation du projet OU Vidéo de démonstration
 # Etapes :
-- [ ] Analyse du dataset
-	- [ ] Analyser la corrélation
+- [x] Analyse du dataset
+	- [x] Clean le dataset
+	- [x] Analyser la corrélation
 - [ ] Commencer par un modèle simple de référence (e.g. régression logistique, régression linéaire, ou autre)
 - [ ] Comparer 3 modèles + complexe
 - [ ] En choisir un

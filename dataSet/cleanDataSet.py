@@ -1,12 +1,13 @@
 import pandas as pd
 import os
 
-def clean_missing_values(input_filepath, output_filepath):
+def clean_and_normalize_data(input_filepath, output_filepath):
     """
-    Charge le dataset, supprime les lignes contenant des valeurs manquantes,
-    affiche un bilan pour le rapport, et sauvegarde le dataset nettoyé.
+    Charge le dataset, supprime les valeurs manquantes, 
+    normalise la colonne 'Influencer' en valeurs numériques, 
+    et sauvegarde le résultat.
     """
-    print("=== ÉTAPE 1 : Nettoyage des valeurs manquantes ===")
+    print("=== ÉTAPE 1 : Nettoyage et Normalisation ===")
     
     # 1. Vérification de l'existence du fichier
     if not os.path.exists(input_filepath):
@@ -18,20 +19,30 @@ def clean_missing_values(input_filepath, output_filepath):
     lignes_initiales = df.shape[0]
 
     # 3. Suppression des lignes incomplètes
-    # dropna() supprime toute ligne ayant au moins un 'NaN'
-    df_clean = df.dropna()
+    # On utilise .copy() pour s'assurer qu'on travaille sur un nouveau tableau propre
+    # et éviter un avertissement pandas (SettingWithCopyWarning) à l'étape suivante.
+    df_clean = df.dropna().copy()
+    
+    # 4. Normalisation de la colonne 'Influencer' avec replace()
+    # On crée un dictionnaire de correspondance (mapping)
+    mapping_influencer = {
+        'Nano': 1,
+        'Micro': 2,
+        'Macro': 3,
+        'Mega': 4
+    }
+    # On remplace les textes par les chiffres correspondants
+    df_clean['Influencer'] = df_clean['Influencer'].replace(mapping_influencer)
+    
+    # 5. Sauvegarde du fichier propre
     lignes_finales = df_clean.shape[0]
-    
-    lignes_supprimees = lignes_initiales - lignes_finales
-    
-    # 4. Sauvegarde du fichier propre
-    # index=False évite de rajouter une colonne avec les anciens numéros de ligne
     df_clean.to_csv(output_filepath, index=False)
     
-    # 5. Affichage du bilan (très utile pour rédiger ton rapport !)
+    # 6. Affichage du bilan
     print(f"-> Lignes au départ  : {lignes_initiales}")
-    print(f"-> Lignes supprimées : {lignes_supprimees}")
+    print(f"-> Lignes supprimées : {lignes_initiales - lignes_finales}")
     print(f"-> Lignes restantes  : {lignes_finales}")
+    print(f"-> Normalisation 'Influencer' appliquée : {mapping_influencer}")
     print(f"-> Fichier sauvegardé sous : '{output_filepath}'\n")
     
     return df_clean
@@ -43,4 +54,9 @@ if __name__ == "__main__":
     fichier_nettoye = "marketing_and_sales_clean.csv"
     
     # Exécution de la fonction
-    dataset_propre = clean_missing_values(fichier_brut, fichier_nettoye)
+    dataset_propre = clean_and_normalize_data(fichier_brut, fichier_nettoye)
+    
+    # Petit aperçu pour vérifier que ça a bien fonctionné
+    if dataset_propre is not None:
+        print("\nAperçu des 5 premières lignes après traitement :")
+        print(dataset_propre.head())

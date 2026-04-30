@@ -16,21 +16,28 @@ La variable clé de ce fichier est le volume de ventes généré (**Sales**, ég
 L'analyse exploratoire a révélé que le dataset brut contient **4 572 enregistrements**. Globalement, les données sont de très bonne qualité :
 * **Aucun doublon** n'a été détecté.
 * **Aucune valeur aberrante** illogique (telle que des budgets négatifs) n'est présente.
-* **Équilibre des classes** : La variable catégorielle *Influencer* est parfaitement équilibrée entre ses quatre catégories, ce qui écarte tout problème de déséquilibre de classe pour la modélisation.
+* **Équilibre des classes** : La variable catégorielle *Influencer* est parfaitement équilibrée entre ses quatre catégories, ce qui facilite l'apprentissage du modèle.
 
 ## 2. Traitement des valeurs manquantes : Stratégie de suppression
 L'audit a mis en évidence la présence de valeurs manquantes (NaN) sur **26 lignes**, impactant les colonnes de budget ainsi que la variable cible (*Sales*).
 
-Nous avons opté pour une **stratégie de suppression stricte** (Listwise Deletion) plutôt qu'un remplacement par la moyenne ou la médiane. Ce choix est justifié par :
-* **Faible impact quantitatif** : Les 26 lignes ne représentent qu'environ 0,5 % du volume total. Leur suppression laisse 4 546 observations saines, ce qui est largement suffisant.
-* **Préservation de la dynamique** : Le dataset présente des corrélations extrêmement fortes (notamment entre la TV et les ventes). L'imputation risquerait d'introduire un biais statistique et de fausser l'apprentissage des relations ou l'évaluation des performances.
+Nous avons opté pour une **stratégie de suppression stricte** (Listwise Deletion). Ce choix est justifié par le faible impact quantitatif (0,5 % des données) et la nécessité de préserver l'intégrité des relations statistiques entre les budgets et les ventes sans introduire de biais d'imputation.
 
-## 3. Traitement des valeurs extrêmes (Outliers)
-Nous avons identifié quelques valeurs extrêmes légitimes (budgets très élevés sur la Radio et les Social Media). La décision a été prise de **les conserver**. 
-* **Contexte métier** : Ces données représentent des campagnes à fort investissement réelles et non des erreurs de saisie.
-* **Robustesse des modèles** : Des algorithmes comme le *Random Forest* ou le *Gradient Boosting* captureront ces effets sans être biaisés, permettant d'étudier l'impact de ces investissements massifs.
+## 3. Normalisation de la variable "Influencer" (Encodage Ordinal)
+La colonne *Influencer* étant textuelle, elle n'est pas directement exploitable par les algorithmes de Machine Learning. Nous avons appliqué une **normalisation ordinale** via la méthode `replace()` de Pandas.
+
+Ce choix se justifie par la hiérarchie naturelle de la taille des audiences d'influenceurs. Nous avons établi la correspondance suivante :
+* **Nano** : 1
+* **Micro** : 2
+* **Macro** : 3
+* **Mega** : 4
+
+Cette transformation permet au modèle de traiter cette information comme une échelle de puissance d'influence plutôt que comme de simples étiquettes distinctes.
+
+## 4. Traitement des valeurs extrêmes (Outliers)
+Nous avons identifié des valeurs extrêmes légitimes sur les budgets Radio et Social Media. Elles ont été **conservées** car elles représentent des campagnes à fort investissement réelles. Les modèles basés sur les arbres (Random Forest, Gradient Boosting) sont nativement robustes à ces variations.
 
 ---
 
 ## Conclusion
-Le pipeline de nettoyage mis en place garantit un jeu de données **100 % sain**. Cette rigueur prévient tout risque de fuite de données (*Data Leakage*) lors des phases d'encodage et de standardisation à venir sur les ensembles d'entraînement et de test.
+Le pipeline de nettoyage et de normalisation garantit un jeu de données **100 % numérique et sain**. Le passage d'un format texte à un format ordinal pour les influenceurs, combiné à la suppression des données incomplètes, fournit une base robuste pour l'entraînement de nos modèles prédictifs.

@@ -1,6 +1,6 @@
 DataScienceProjectSujet3/
 │
-├── data/                     # Dataset brut + dataset nettoyé
+├── dataSet/                     # Dataset brut + dataset nettoyé
 │   ├── raw/
 │   └── processed/
 │

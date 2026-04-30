@@ -6,7 +6,7 @@ st.title("📈 KPIs Marketing")
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("../marketing_and_sales_clean.csv")
+    return pd.read_csv("../dataSet/marketing_and_sales_clean.csv")
 
 df = load_data()
 channels = ["TV", "Radio", "Social Media", "Influencer"]

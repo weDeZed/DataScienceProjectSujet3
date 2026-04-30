@@ -7,13 +7,13 @@ st.title("📊 Analyse des données (EDA)")
 # Charger les données
 @st.cache_data
 def load_data():
-    return pd.read_csv("../marketing_and_sales_clean.csv")
+    return pd.read_csv("../dataSet/marketing_and_sales_clean.csv")
 
 df = load_data()
 
 # Distribution des budgets
 st.header("Distribution des budgets par canal")
-channels = ["TV", "Radio", "Social Media", "Influenceurs"]
+channels = ["TV", "Radio", "Social Media", "Influencer"]
 st.bar_chart(df[channels])
 
 # Corrélation entre budgets et ventes

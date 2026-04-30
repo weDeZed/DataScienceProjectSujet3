@@ -9,7 +9,7 @@ def load_data():
     return pd.read_csv("../marketing_and_sales_clean.csv")
 
 df = load_data()
-channels = ["TV", "Radio", "Social Media", "Influenceurs"]
+channels = ["TV", "Radio", "Social Media", "Influencer"]
 
 # KPIs
 st.header("KPIs principaux")

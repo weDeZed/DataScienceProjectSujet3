@@ -6,7 +6,7 @@
 - [x] Analyse du dataset
 	- [x] Clean le dataset
 	- [x] Analyser la corrélation
-- [ ] Commencer par un modèle simple de référence (e.g. régression logistique, régression linéaire, ou autre)
+- [x] Commencer par un modèle simple de référence (régression linéaire)
 - [ ] Comparer 3 modèles + complexe
 - [ ] En choisir un
 - [ ] Analyser les erreurs 
@@ -18,3 +18,4 @@
 
 # Notes : 
 - On remarque une très faible quantité de lignes avec des colonnes manquantes (- de 30 sur 4562). On décide de les supprimer
+- Le modèle de régression linéaire permet d'évaluer en se basant sur une combination des budgets des 3 canaux de communication. On peut envisager en piste d'amélioration de permettre une simulation ciblée par canal.

@@ -19,4 +19,4 @@
 # Notes : 
 - On remarque une très faible quantité de lignes avec des colonnes manquantes (- de 30 sur 4562). On décide de les supprimer
 - Le modèle de régression linéaire permet d'évaluer en se basant sur une combination des budgets des 3 canaux de communication. On peut envisager en piste d'amélioration de permettre une simulation ciblée par canal.
-- XGB model pas retenu : la RME est plus élevé
+- XGB model pas retenu : la RMSE est plus élevé

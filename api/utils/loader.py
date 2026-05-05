@@ -5,7 +5,9 @@ from api.schemas.input import PredictionInput
 def load_model():
     model_path = os.path.abspath(os.path.join(
         os.path.dirname(__file__),
-        '..', '..', 'ml_models', 'saved_models', 'linear_regression', 'model.pkl'))
+        '..', '..', 'ml_models', 'saved_models', 'gradient_boosting', 'model.pkl'))
+    # DataScienceProjectSujet3\ml_models\saved_models\gradient_boosting
+
     if not os.path.exists(model_path):
         return None
     try:

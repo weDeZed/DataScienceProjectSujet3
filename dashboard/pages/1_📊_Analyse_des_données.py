@@ -5,9 +5,12 @@ import plotly.express as px
 st.title("📊 Analyse des données (EDA)")
 
 # Charger les données
+
 @st.cache_data
 def load_data():
-    return pd.read_csv("../dataSet/marketing_and_sales_clean.csv")
+    import os
+    csv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "dataSet", "marketing_and_sales_clean.csv"))
+    return pd.read_csv(csv_path)
 
 df = load_data()
 

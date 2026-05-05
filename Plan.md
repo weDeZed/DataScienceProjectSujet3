@@ -23,3 +23,5 @@
 - Tester polynomial regression pour s'adapter à la courbe du budget social media & radio : courbe pas assez prononcé pour que ce soit pertinent
 - Tester de passer les test size de 0.25 à 0.33
 - Le dataset est synthétique et intentionnellement linéaire ce qui justifie la contre-performance des modèles complexes. Ouverture pour le dossier : Ces modèles pourraient s'illustrer mieux avec une tâche plus complexe tel que la prédiction du ROI
+- Le MLP est le seul modèle du projet à nécessiter un scaling obligatoire (intégré dans le Pipeline). Ses performances sont comparables à la régression linéaire sur ce dataset ce qui confirme que la complexité architecturale n'apporte pas de gain réel ici.
+  Conclusion: un réseau neuronal converge vers une solution linéaire lorsque la relation sous-jacente est effectivement linéaire, tout en consommant davantage de ressources.

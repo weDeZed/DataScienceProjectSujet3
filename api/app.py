@@ -1,13 +1,35 @@
 from fastapi import FastAPI, HTTPException
 from api.schemas.input import PredictionInput
 from api.utils.loader import load_model, predict_with_model, get_model_info
+import pandas as pd
+from sklearn import ensemble
+import pickle
+import os
 from pydantic import BaseModel
 
-app = FastAPI()
+
+app = FastAPI(
+        title="API Prédiction Marketing",
+        description="""
+Cette API prédit les ventes à partir des budgets marketing (TV, Radio, Social Media, Influenceur).
+
+**Entrée pour /predict :**
+```
+{
+    "tv": float,           # Budget TV
+    "radio": float,        # Budget Radio
+    "social_media": float, # Budget Social Media
+    "influencer": float    # Influenceur (score ou encodé)
+}
+```
+""",
+        version="1.0.0"
+)
 
 # Load model at startup
 # Load model at startup (can be None)
 the_model = load_model()
+
 
 @app.get("/health")
 def health():

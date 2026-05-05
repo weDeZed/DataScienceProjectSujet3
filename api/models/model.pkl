@@ -1,5 +1,0 @@
-# Placez ici le modèle entraîné (model.pkl) fourni par le ML Engineer.
-# Exemple de génération :
-# import pickle
-# with open('model.pkl', 'wb') as f:
-#     pickle.dump(votre_modele, f)

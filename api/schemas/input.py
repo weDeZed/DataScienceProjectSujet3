@@ -1,8 +1,7 @@
 from pydantic import BaseModel
-from typing import Any
 
 class PredictionInput(BaseModel):
-    # Remplacer ces champs par ceux attendus par le modèle
-    feature1: float
-    feature2: float
-    # Ajouter d'autres features selon le modèle
+    tv: float
+    radio: float
+    social_media: float
+    influencer: float  # ou int selon l'encodage

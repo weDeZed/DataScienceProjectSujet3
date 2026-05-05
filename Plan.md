@@ -20,3 +20,6 @@
 - On remarque une très faible quantité de lignes avec des colonnes manquantes (- de 30 sur 4562). On décide de les supprimer
 - Le modèle de régression linéaire permet d'évaluer en se basant sur une combination des budgets des 3 canaux de communication. On peut envisager en piste d'amélioration de permettre une simulation ciblée par canal.
 - XGB model pas retenu : la RMSE est plus élevé
+- Tester polynomial regression pour s'adapter à la courbe du budget social media & radio : courbe pas assez prononcé pour que ce soit pertinent
+- Tester de passer les test size de 0.25 à 0.33
+- Le dataset est synthétique et intentionnellement linéaire ce qui justifie la contre-performance des modèles complexes. Ouverture pour le dossier : Ces modèles pourraient s'illustrer mieux avec une tâche plus complexe tel que la prédiction du ROI

@@ -1,8 +1,21 @@
 import pickle
 import os
+import sklearn
+import pandas as pd
 from api.schemas.input import PredictionInput
 
+SKLEARN_VERSION_REQUIRED = "1.8.0"
+
+def check_sklearn_version():
+    current = sklearn.__version__
+    if current != SKLEARN_VERSION_REQUIRED:
+        raise RuntimeError(
+            f"Version sklearn incompatible : modèles entraînés avec {SKLEARN_VERSION_REQUIRED}, "
+            f"environnement actuel = {current}. "
+            f"Exécutez : pip install scikit-learn=={SKLEARN_VERSION_REQUIRED}"
+        )
 def load_model():
+    check_sklearn_version()
     model_path = os.path.abspath(os.path.join(
         os.path.dirname(__file__),
         '..', '..', 'ml_models', 'saved_models', 'gradient_boosting', 'model.pkl'))
@@ -15,6 +28,7 @@ def load_model():
             model = pickle.load(f)
         return model
     except Exception:
+        print(f'cant read model at path {model_path}')
         return None
 
 def predict_with_model(model, input_data: PredictionInput):

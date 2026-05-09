@@ -2,7 +2,7 @@
 
 ## Lancer le dashboard
 
-1. Créez un environnement virtuel python dans le dossier api :
+1. Créez un environnement virtuel python dans le dossier :
    ```bash
    python -m venv ./dashboard
    dashboard/Scripts/activate

@@ -4,6 +4,12 @@ import sklearn
 import pandas as pd
 from api.schemas.input import PredictionInput
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
 SKLEARN_VERSION_REQUIRED = "1.8.0"
 
 def check_sklearn_version():
@@ -18,7 +24,7 @@ def load_model():
     check_sklearn_version()
     model_path = os.path.abspath(os.path.join(
         os.path.dirname(__file__),
-        '..', '..', 'ml_models', 'saved_models', 'gradient_boosting', 'model.pkl'))
+        '..', '..', 'ml_models', 'saved_models', 'linear_regression', 'model.pkl'))
     # DataScienceProjectSujet3\ml_models\saved_models\gradient_boosting
 
     if not os.path.exists(model_path):
@@ -28,20 +34,20 @@ def load_model():
             model = pickle.load(f)
         return model
     except Exception:
-        print(f'cant read model at path {model_path}')
+        logger.info(f'cant read model at path {model_path}')
         return None
 
 def predict_with_model(model, input_data: PredictionInput):
     if model is None:
         raise ValueError("Aucun modèle n'est chargé.")
     # Adapter selon le modèle (ex: DataFrame, liste, etc.)
-    features = [
-        input_data.tv,
-        input_data.radio,
-        input_data.social_media,
-        input_data.influencer
-    ]
-    prediction = model.predict([features])
+    features = pd.DataFrame([{
+        "TV": input_data.tv,
+        "Radio": input_data.radio,
+        "Social Media": input_data.social_media,
+        "Influencer": input_data.influencer
+    }])
+    prediction = model.predict(features)
     return float(prediction[0])
 
 def get_model_info(model):

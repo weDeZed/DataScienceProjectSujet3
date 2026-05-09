@@ -22,16 +22,21 @@ api/
 
 ## ⚙️ Installation & Lancement
 
-1. Installez les dépendances :
+1. Créez un environnement virtuel python dans le dossier api :
    ```bash
-   pip install fastapi uvicorn pydantic
+   python -m venv ./api
+   api/Scripts/activate
    ```
-2. Placez le modèle entraîné dans `api/models/model.pkl`.
-3. Lancez l’API :
+2. Installez les dépendances :
+   ```bash
+   pip install -r api/requirements.txt
+   ```
+3. Placez le modèle entraîné dans `api/models/model.pkl`.
+4. Lancez l’API :
    ```bash
    uvicorn api.app:app --reload
    ```
-4. Accédez à la documentation interactive :
+5. Accédez à la documentation interactive :
    - Swagger UI : [http://localhost:8000/docs](http://localhost:8000/docs)
    - Redoc : [http://localhost:8000/redoc](http://localhost:8000/redoc)
 

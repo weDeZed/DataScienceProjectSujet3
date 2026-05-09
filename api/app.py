@@ -28,7 +28,9 @@ Cette API prédit les ventes à partir des budgets marketing (TV, Radio, Social 
 
 # Load model at startup
 # Load model at startup (can be None)
+print(f'loading model...')
 the_model = load_model()
+print(f'model loaded')
 
 
 @app.get("/health")

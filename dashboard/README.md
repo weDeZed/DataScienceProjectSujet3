@@ -2,13 +2,18 @@
 
 ## Lancer le dashboard
 
+1. Créez un environnement virtuel python dans le dossier api :
+   ```bash
+   python -m venv ./dashboard
+   dashboard/Scripts/activate
+   ```
 1. Installez les dépendances :
    ```bash
-   pip install -r requirements.txt
+   pip install -r dashboard/requirements.txt
    ```
 2. Lancez Streamlit :
    ```bash
-   streamlit run app.py
+   streamlit run dashboard/app.py
    ```
 
 ## Fonctionnalités principales
